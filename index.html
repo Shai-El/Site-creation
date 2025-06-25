@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SystemBuilder</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #0f0f0f;
+      color: #e0e0e0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    textarea {
+      width: 100%;
+      max-width: 600px;
+      height: 150px;
+      background: #1a1a1a;
+      color: #e0e0e0;
+      border: 1px solid #444;
+      border-radius: 5px;
+      padding: 1rem;
+      font-size: 1rem;
+    }
+    button {
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: #222;
+      border: 1px solid #555;
+      border-radius: 5px;
+      color: #e0e0e0;
+      cursor: pointer;
+    }
+    .output {
+      margin-top: 2rem;
+      max-width: 600px;
+      width: 100%;
+      background: #111;
+      padding: 1rem;
+      border-radius: 5px;
+      white-space: pre-wrap;
+      border: 1px solid #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>SystemBuilder: Prompt-to-Structure Tool</h1>
+  <p>Describe your project below. We will generate a clean project layout to get you started.</p>
+  <textarea id="userPrompt" placeholder="e.g., I'm building a simple portfolio website for my photography"></textarea>
+  <button onclick="generateStructure()">Generate Layout</button>
+  <div class="output" id="outputBox"></div>
+
+  <script>
+    function generateStructure() {
+      const input = document.getElementById('userPrompt').value.toLowerCase();
+      const output = document.getElementById('outputBox');
+
+      let structure = '';
+      if (input.includes('game')) {
+        structure = `📁 my-game/
+├── 📁 assets/
+│   ├── player.png
+│   └── enemy.png
+├── 📁 src/
+│   └── main.js
+├── 📄 index.html
+├── 📄 README.md
+
+README.md:
+# My Game
+A simple browser game.
+
+## Setup
+- Open index.html to play.`;
+      } else if (input.includes('website') || input.includes('portfolio')) {
+        structure = `📁 my-website/
+├── 📁 images/
+├── 📁 css/
+│   └── style.css
+├── 📁 js/
+│   └── script.js
+├── 📄 index.html
+├── 📄 README.md
+
+README.md:
+# My Portfolio Website
+Clean responsive site for showcasing work.`;
+      } else if (input.includes('brand') || input.includes('business')) {
+        structure = `📁 my-brand/
+├── 📁 branding/
+│   ├── logo.png
+│   └── brand-guide.pdf
+├── 📁 web/
+│   ├── index.html
+│   └── style.css
+├── 📄 README.md
+
+README.md:
+# My Brand Package
+Basic structure for a new venture.`;
+      } else {
+        structure = `📁 my-project/
+├── 📁 src/
+│   └── main.js
+├── 📄 index.html
+├── 📄 README.md
+
+README.md:
+# My Project
+Basic starter structure.`;
+      }
+
+      output.textContent = structure;
+    }
+  </script>
+</body>
+</html>
